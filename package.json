@@ -1,0 +1,52 @@
+{
+  "name": "mock-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/hello.js",
+  "scripts": {
+    "build": "./node_modules/typescript/bin/tsc",
+    "local": "npm run build && ./node_modules/serverless/bin/serverless invoke local -f hello -l",
+    "deploy": "npm run build && ./node_modules/serverless/bin/serverless deploy -v",
+    "deploy:function": "npm run build && npm run test:unit && ./node_modules/serverless/bin/serverless deploy function -f hello",
+    "stream:logs": "./node_modules/serverless/bin/serverless logs -f hello -t",
+    "test:unit": "jest --verbose test",
+    "test:unit:coverage": "jest --verbose --coverage=true --collectCoverageFrom=src/**/*.{js,jsx,ts,vue} test || exit 0"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@serverless/event-mocks": "^1.1.1",
+    "@types/serverless": "^1.67.0",
+    "@types/aws-lambda": "^8.10.50",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.1",
+    "jest": "^25.4.0",
+    "jest-mock-extended": "^1.0.8",
+    "serverless": "^1.67.3",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/test"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node",
+      "vue"
+    ]
+  }
+}

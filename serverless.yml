@@ -1,0 +1,27 @@
+service: hello-world
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: test
+
+functions:
+  hello:
+    handler: dist/hello.handler
+    events:
+      - http:
+          path: hello
+          method: get
+
+package:
+  exclude:
+    - node_modules/**
+    - coverage/**
+    - .idea
+    - .gitignore
+    - src/**
+    - test/**
+    - dist/**.map
+    - tsconfig.json
+    - package.json
+    - package-lock.json
